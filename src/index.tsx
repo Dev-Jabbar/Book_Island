@@ -1,11 +1,9 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 
 import reportWebVitals from "./reportWebVitals";
 import { MyProvider } from "./MyContext";
 
-import { BrowserRouter as Router } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import AppRouter from "./Router";
 const root = ReactDOM.createRoot(

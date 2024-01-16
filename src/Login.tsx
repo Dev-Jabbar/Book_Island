@@ -13,7 +13,6 @@ const Login = () => {
     setPassword,
     setError,
     setCustomerId,
-    customerId,
   } = useMyContext();
   const navigate = useNavigate();
 

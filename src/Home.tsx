@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import axios from "axios";
 import { useMyContext } from "./MyContext";
@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 import CreateBook from "./CreatedBook";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
 
 // Define the type for the book data
 interface Book {
@@ -55,11 +54,11 @@ function Home() {
   const [totalPoints, setTotalPoints] = useState<number>(0);
   const loader = useRef<HTMLDivElement | null>(null);
 
-  const [creatingCart, setCreatingCart] = useState(false);
+  const [, setCreatingCart] = useState(false);
   const [deletingCart, setDeletingCart] = useState(false);
 
   const [customerPoints, setCustomerPoints] = useState();
-  const [localError, setLocalError] = useState<string | null>(null);
+  const [, setLocalError] = useState<string | null>(null);
 
   const [createdOrders, setCreatedOrders] = useState();
 
@@ -240,7 +239,7 @@ function Home() {
     };
 
     fetchCustomerPoints();
-  }, [createdOrders]);
+  }, [createdOrders, customerId]);
 
   useEffect(() => {
     const getAllCartDetailsForCustomer = async () => {
@@ -267,7 +266,7 @@ function Home() {
     };
 
     getAllCartDetailsForCustomer();
-  }, [selectedBook, handleDeleteCart]);
+  }, [selectedBook, customerId, setTotalPoints, setCarts]);
 
   const openModal = (book: Book) => {
     setSelectedBook(book);
@@ -311,8 +310,6 @@ function Home() {
 
   return (
     <div className="py-10 md:px-40 px-5 bg-gray-500 text-white">
-      <ToastContainer />
-
       <div className="flex justify-center items-center">
         {SelectBookloading && <Spinner />}
       </div>
@@ -380,7 +377,7 @@ function Home() {
             })
           ) : (
             <div>
-              <img src="./emptyCart.jpg" />
+              <img src="./emptyCart.jpg" alt="empty cart" />
             </div>
           )}
 
