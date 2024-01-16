@@ -266,7 +266,7 @@ function Home() {
     };
 
     getAllCartDetailsForCustomer();
-  }, [selectedBook, customerId, setTotalPoints, setCarts]);
+  }, [selectedBook, customerId, deletingCart, setTotalPoints, setCarts]);
 
   const openModal = (book: Book) => {
     setSelectedBook(book);
