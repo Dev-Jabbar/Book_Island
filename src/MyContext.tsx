@@ -1,4 +1,3 @@
-// MyContext.tsx
 import React, { createContext, useState, useContext, ReactNode } from "react";
 
 interface MyContextProps {
@@ -12,16 +11,26 @@ interface MyContextProps {
   order: number;
   setPoints: React.Dispatch<React.SetStateAction<number>>;
   setOrder: React.Dispatch<React.SetStateAction<number>>;
+  error: string | null;
+  setError: React.Dispatch<React.SetStateAction<string | null>>;
+  customerId: number | null;
+  setCustomerId: React.Dispatch<React.SetStateAction<number | null>>;
+  runFetchBooks: boolean; // Add the new property to the interface
+  setRunFetchBooks: React.Dispatch<React.SetStateAction<boolean>>; // Add the new property to the interface
 }
 
 const MyContext = createContext<MyContextProps | undefined>(undefined);
 
 export const MyProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
   const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
-  const [points, setPoints] = useState<number>(100); // Initialize points as a number
-  const [order, setOrder] = useState<number>(0); // Initialize points as a number
+  const [points, setPoints] = useState<number>(100);
+  const [order, setOrder] = useState<number>(0);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [customerId, setCustomerId] = useState<number | null>(null);
+  const [runFetchBooks, setRunFetchBooks] = useState(false); // Initialize the state
+
   return (
     <MyContext.Provider
       value={{
@@ -35,6 +44,12 @@ export const MyProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         setPoints,
         order,
         setOrder,
+        error,
+        setError,
+        customerId,
+        setCustomerId,
+        runFetchBooks, // Include the new property in the value
+        setRunFetchBooks, // Include the new property in the value
       }}
     >
       {children}
